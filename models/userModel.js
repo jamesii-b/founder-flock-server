@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     name: { type: String },
-    number: { type: String },
     email: { type: String },
+    number: { type: String,default:"" },
     profile_pic: {
         type: String,
         default: "https://drgsearch.com/wp-content/uploads/2020/01/no-photo.png"

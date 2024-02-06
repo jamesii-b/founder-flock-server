@@ -3,7 +3,7 @@ const router = express.Router();
 const registerController = require('../controllers/registerController');
 const loginController = require('../controllers/loginController');
 const loginLimiter = require('../middleware/requestLimiter');
-const generateTokens = require('../functions/auth/tokens');
+const {generateTokens} = require('../functions/auth/tokens');
 
 router.post("/login", loginLimiter, async (req, res) => {
     console.log("login===", req.body);

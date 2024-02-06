@@ -1,13 +1,10 @@
 const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel');
-async function registerController(_email, _pass, _name, _phone_num) {
+async function registerController(_email, _pass) {
     const salt = await bcrypt.genSalt(10);
     const _hashedPass = await bcrypt.hash(_pass, salt);
-
     const newUser = new userModel({
-        name: _name,
         email: _email,
-        number: _phone_num,
         password: _hashedPass,
     })
     try {
