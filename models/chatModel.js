@@ -24,7 +24,7 @@ const chatSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-  
+
 })
 
 const chatModel = mongoose.model('Chat', chatSchema)

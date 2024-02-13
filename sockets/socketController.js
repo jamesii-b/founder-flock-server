@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
     io.emit("getOnlineUsers", userSocketMap);
     socket.on("new-message", async (newMessageRecieved) => {
         try {
-            //match with userSocketMap
+            console.log("new-message", newMessageRecieved);
             const receiverSocket = userSocketMap.find((user) => user.uID === newMessageRecieved.receiverID);
             if (receiverSocket) {
                 io.to(receiverSocket.socketID).emit("new-message", newMessageRecieved);

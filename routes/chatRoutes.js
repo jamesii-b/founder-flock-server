@@ -13,7 +13,7 @@ router.get("/chats/init", (req, res) => {
 })
 
 
-router.get("/chats/specific", (req, res) => {
+router.post("/chats/specific", (req, res) => {
     try {
 
         getSpecificChat(req, res);
