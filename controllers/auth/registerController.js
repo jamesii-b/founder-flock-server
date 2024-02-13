@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const userModel = require('../models/userModel');
+const userModel = require('../../models/userModel');
 async function registerController(_email, _pass) {
     const salt = await bcrypt.genSalt(10);
     const _hashedPass = await bcrypt.hash(_pass, salt);

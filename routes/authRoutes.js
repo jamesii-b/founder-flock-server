@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const registerController = require('../controllers/registerController');
-const loginController = require('../controllers/loginController');
+const registerController = require('../controllers/auth/registerController');
+const loginController = require('../controllers/auth/loginController');
 const loginLimiter = require('../middleware/requestLimiter');
 const authenticateToken = require('../middleware/jwtAuth');
-const logoutController = require('../controllers/logoutController');
+const logoutController = require('../controllers/auth/logoutController');
 
 router.post("/login", loginLimiter, async (req, res) => {
     if (req.body.email == null || req.body.password == null || req.body == null) {

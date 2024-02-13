@@ -1,6 +1,6 @@
-const userModel = require("../models/userModel");
+const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt");
-const { generateTokens } = require("../utils/jwt-tokens");
+const { generateTokens } = require("../../utils/jwt-tokens");
 async function loginController(_email, _pass, res) {
     try {
         const user = await userModel.findOne({ email: _email });
