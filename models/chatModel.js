@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema.Types
-const moment = require('moment-timezone');
 
 const chatSchema = new mongoose.Schema({
     sender: {

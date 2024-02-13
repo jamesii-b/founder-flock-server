@@ -1,7 +1,26 @@
-const express=require("express")
-const getInitialChats = require("../controllers/chats/getInitialChats")
-const router=express.Router()
+const express = require("express")
+const getInitialChat = require("../controllers/chats/getInitialChats")
+const getSpecificChat = require("../controllers/chats/getAllChats")
+const router = express.Router()
 
-router.get("/chats",(req,res)=>{
-    getInitialChats(req,res);
+router.get("/chats/init", (req, res) => {
+    try {
+        getInitialChat(req, res);
+    } catch (err) {
+        console.log(err)
+        res.status(505).json({ message: "Internal  Error" })
+    }
 })
+
+
+router.get("/chats/specific", (req, res) => {
+    try {
+
+        getSpecificChat(req, res);
+    } catch (err) {
+        console.log(err)
+        res.status(505).json({ message: "Internal Server Error" })
+    }
+});
+
+module.exports = router;

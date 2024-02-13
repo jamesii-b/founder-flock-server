@@ -1,4 +1,5 @@
-async function getInitialChats(req, res) {
+const Chat = require('../../models/chatModel');
+async function getInitialChat(req, res) {
     try {
         const chats = await Chat.find({})
             .select('message sentAt sender receiver')
@@ -17,8 +18,9 @@ async function getInitialChats(req, res) {
 
         res.status(200).json({ chats });
     } catch (e) {
+        console.log(e);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
-module.exports = getInitialChats;
+module.exports = getInitialChat;

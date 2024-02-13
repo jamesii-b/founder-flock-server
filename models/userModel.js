@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
         default: "https://drgsearch.com/wp-content/uploads/2020/01/no-photo.png"
     },
     password: { type: String, required: true },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 

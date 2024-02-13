@@ -24,7 +24,8 @@ app.get('/', (req, res) => {
 });
 
 // Authentication route
-app.use('/api', require('./routes/authRoutes'));
+app.use('/api', require('./routes/authRoutes'), require('./routes/chatRoutes'),require('./routes/otherRoutes')  );
+// app.use('/api', require('./routes/authRoutes'), require('./routes/chatRoutes'))
 
 // Middleware for JWT authentication
 app.use('/test', require('./middleware/jwtAuth'))

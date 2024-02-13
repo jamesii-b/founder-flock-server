@@ -15,15 +15,22 @@ router.post("/login", loginLimiter, async (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    if (req.body != null) {
-        if (registerController(req.body.email, req.body.password)) {
-            res.status(200).json({ "status": "Registered" })
+    try{
+
+        if (req.body != null) {
+            if (registerController(req.body.email, req.body.password)) {
+                res.status(200).json({ "status": "Registered" })
+            }
+            else {
+                res.status(500).json({ "status": "Internal Server Error" })
+            }
+        } else {
+            res.status(300).json({ "status": "Syntax Error" })
         }
-        else {
-            res.status(500).json({ "status": "Internal Server Error" })
-        }
-    } else {
-        res.status(300).json({ "status": "Syntax Error" })
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({ "status": "Internal Server Error" })
     }
 })
 
