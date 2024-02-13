@@ -9,10 +9,8 @@ async function registerController(_email, _pass) {
     })
     try {
         await newUser.save()
-        console.log("DONE")
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }

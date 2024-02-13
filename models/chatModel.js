@@ -1,15 +1,14 @@
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema.Types
 const moment = require('moment-timezone');
-const dateIndia = moment.tz(Date.now(), "Asia/Calcutta");
 
 const chatSchema = new mongoose.Schema({
-    from: {
+    sender: {
         type: ObjectId,
         required: true,
         ref: 'user',
     },
-    to: {
+    receiver: {
         type: ObjectId,
         required: true,
         ref: 'user',
@@ -20,17 +19,14 @@ const chatSchema = new mongoose.Schema({
     },
     sentAt: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     seen: {
         type: Boolean,
         default: false,
     },
-    isStored: {
-        type: Boolean,
-        default: false,
-    },
+  
 })
 
-const chatModel = mongoose.model('chatModel', chatSchema)
+const chatModel = mongoose.model('chats', chatSchema)
 module.exports = chatModel

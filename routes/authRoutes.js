@@ -3,35 +3,32 @@ const router = express.Router();
 const registerController = require('../controllers/registerController');
 const loginController = require('../controllers/loginController');
 const loginLimiter = require('../middleware/requestLimiter');
-const {generateTokens} = require('../functions/auth/tokens');
+const authenticateToken = require('../middleware/jwtAuth');
+const logoutController = require('../controllers/logoutController');
 
 router.post("/login", loginLimiter, async (req, res) => {
-    console.log("login===", req.body);
-    console.log(req.body.email);
-    console.log(req.body.password);
-    doc = await loginController(req.body.email, req.body.password);
-    console.log(doc)
-    if (doc["status"]) {
-        console.log(doc["id"])
-        user = await generateTokens(req.body.email, doc["id"]);
-        res.status(200).send(user);
-    } else { res.status(403).json({ message: "Email id or password doesn't match", type: "error" }) };
+    if (req.body.email == null || req.body.password == null || req.body == null) {
+        res.status(403).json({ message: "Email id or password doesn't match", type: "error" });
+    } else {
+        loginController(req.body.email, req.body.password, res);
+    }
 });
 
 router.post("/register", (req, res) => {
-    console.log(req.body)
-    console.log(req.body.email)
-    console.log(req.body.password)
     if (req.body != null) {
         if (registerController(req.body.email, req.body.password)) {
-            res.json({ "status": "Registered" })
+            res.status(200).json({ "status": "Registered" })
         }
         else {
-            res.json({ "status": "Technical Error" })
+            res.status(500).json({ "status": "Internal Server Error" })
         }
     } else {
-        res.json({ "status": "Syntax Error" })
+        res.status(300).json({ "status": "Syntax Error" })
     }
+})
+
+router.post("/logout", authenticateToken, (req, res) => {
+    logoutController(res)
 })
 
 module.exports = router;

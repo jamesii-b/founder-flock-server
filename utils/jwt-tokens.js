@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 async function generateTokens(uuid) {
-    console.log(uuid)
     try {
         const token = await jwt.sign(
             {
@@ -17,7 +16,7 @@ async function generateTokens(uuid) {
         return { error };
     }
 }
-function returnID(token) {
+function validateToken(token) {
     try {
         return jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
@@ -25,4 +24,4 @@ function returnID(token) {
     }
 }
 
-module.exports = { generateTokens, returnID };
+module.exports = { generateTokens, validateToken };

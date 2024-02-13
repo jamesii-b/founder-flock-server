@@ -1,24 +1,14 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     name: { type: String },
-    email: { type: String },
-    number: { type: String,default:"" },
+    email: { type: String, required: true, unique: true },
     profile_pic: {
         type: String,
         default: "https://drgsearch.com/wp-content/uploads/2020/01/no-photo.png"
     },
-    status: {
-        type: String,
-        default: "Hey there! I am using Cypher."
-    },
-    password: { type: String },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
+    password: { type: String, required: true },
 });
 
 
-module.exports = mongoose.model('UserModel', userSchema)
+const userModel = mongoose.model('user', userSchema)
+module.exports = userModel;
