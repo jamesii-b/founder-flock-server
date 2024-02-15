@@ -32,7 +32,14 @@ io.on("connection", (socket) => {
             if (receiverSocket) {
                 io.to(receiverSocket.socketID).emit("new-message", newMessageRecieved);
             }
-            await createChat(newMessageRecieved.senderID, newMessageRecieved.receiverID, newMessageRecieved.message);
+            try {
+
+                await createChat(newMessageRecieved.senderID, newMessageRecieved.receiverID, newMessageRecieved.message);
+                console.log("Chat saved succesfully")
+            } catch (error) {
+                console.log("Error saving chat:", error);
+            }
+
         } catch (error) {
             console.error("Error saving chat:", error);
         }

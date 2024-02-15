@@ -2,14 +2,14 @@ const Chat = require('../../models/chatModel');
 async function getInitialChat(req, res) {
     try {
         const chats = await Chat.find({})
-            .select('message sentAt sender receiver')
+            .select('message sentAt senderID receiverID')
             .populate({
-                path: 'sender',
+                path: 'senderID',
                 model: 'User',
                 select: 'name profile_pic',
             })
             .populate({
-                path: 'receiver',
+                path: 'receiverID',
                 model: 'User',
                 select: 'name profile_pic',
             })
